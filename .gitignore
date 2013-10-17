@@ -1,3 +1,16 @@
+# Latex
+
+*.aux
+*.blg
+*.bbl
+*.sav
+*leftover.*
+*.synctex
+*.toc
+*.idx
+*.bak
+
+
 #################
 ## Eclipse
 #################
@@ -8,7 +21,7 @@
 bin/
 tmp/
 *.tmp
-*.bak
+
 *.swp
 *~.nib
 local.properties
