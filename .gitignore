@@ -4,7 +4,7 @@
 *.blg
 *.bbl
 *.sav
-*leftover.*
+*leftover*.*
 *.synctex
 *.toc
 *.idx

@@ -66,7 +66,7 @@ These probabilities can be calculated via matrix multiplication: $p_{jm}(l)=\lef
 
 %Filling $\mathbf{P}$ with actual numbers requires exact knowledge of the dose-toxicity function $F(x)$, which of course is not available (otherwise, the experiment is unnecessary!). However, many UD properties can be deduced and calculated based on the simple assumption that $F(x)$ increases from 0 to 1 with increasing dose.
 
-\subsection{The UD Balance Point}
+\subsection{The UD Balance Point}\label{sec:balpoint}
 
 UD designs generate Markov chains with a central tendency, meaning that dose assignments tend to meander back and forth around some typical dose that can be calculated from design parameters \citep{Durh:Flou:rand:1994,Hugh:Rand:1995}. This dose was recently termed the \emph{balance point} by Oron and Hoff \citep{Oron:Hoff:thek:2009}. While the term and some related methodological considerations are recent, the intuition giving rise to designs with balance points is as old as the UD design itself.
 
@@ -471,32 +471,32 @@ The $k$-in-a-row design generates a $k$-th order Markov chain, because knowledge
   &  0    &0 &0   &0 &0   &0 &0         &0 &F_6 & 0 &\bar{F}_6 & 0\\
 \end{array}\right]
 \end{equation}
-The matrix is irreducible, meaning that there is an asymptotic distribution $\boldsymbol{\pi}^{\textrm{ex.}}$, with positive values for all $Mk$ states. This is not the asymptotic \emph{allocation} distribution $\boldsymbol{\pi}$, since it separately counts different internal states of the same level $m$. The latter can be found by summing $\boldsymbol{\pi}^{\textrm{ex.}}$ over the internal states of each level.
+The matrix is irreducible, meaning that there is an asymptotic distribution $\boldsymbol{\pi}^{\textrm{(states)}}$, with positive values for all $Mk$ states. This is not the asymptotic \emph{allocation} distribution $\boldsymbol{\pi}$, since it separately counts different internal states of the same level $m$. The latter can be found by summing $\boldsymbol{\pi}^{\textrm{(states)}}$ over the internal states of each level.
 
-\cite{Gezm:Geom:1996} found the correct specification of $\boldsymbol{\pi}^{\textrm{ex.}}$ by noting that the only communication between internal states of the same level $m$ is by $+1$ increments, because a toxicity bumps the experiment an entire level down.\footnote{The only exception is on the lower boundary $d_1$, where all toxicities revert to that level's internal-state $0$. It can be shown, though, that the geometric formula still holds.}  The balance equations between any two adjacent internal states in the same level are
+\cite{Gezm:Geom:1996} found the correct specification of $\boldsymbol{\pi}^{\textrm{(states)}}$ by noting that the only communication between internal states of the same level $m$ is by $+1$ increments, because a toxicity bumps the experiment an entire level down.\footnote{The only exception is on the lower boundary $d_1$, where all toxicities revert to that level's internal-state $0$. It can be shown, though, that the geometric formula still holds.}  The balance equations between any two adjacent internal states in the same level are
 
 \begin{equation}\label{eq:kinternal}
-\boldsymbol{\pi}^{\textrm{ex.}}_{m(j+1)}=\left(1-F_m\right)\boldsymbol{\pi}^{\textrm{ex.}}_{m(j)},\ \ i=0,\ldots,k-2,
+\pi^{\textrm{(states)}}_{m(j+1)}=\left(1-F_m\right)\pi^{\textrm{(states)}}_{m(j)},\ \ i=0,\ldots,k-2,
 \end{equation}
 \noindent where $m(j)$ denotes the internal state $j$ within dose level $m$. This is the formula of a decreasing geometric sequence with a quotient of $\left(1-F_m\right)$, hence the name Gezmu suggested for the design (``geometric UD'').
 
 Now, the stationary balance between adjacent dose levels is
 \begin{equation}\label{eq:kexternal}
-\boldsymbol{\pi}^{\textrm{ex.}}_{m(k-1)}\left(1-F_m\right)=\boldsymbol{\pi}_{m+1}F_{m+1},
+\pi^{\textrm{(states)}}_{m(k-1)}\left(1-F_m\right)=\pi_{m+1}F_{m+1},
 \end{equation}
-\noindent where $\boldsymbol{\pi}_{m+1}$ is the marginal allocation frequency at $d_{m+1}$. In words, `up' transitions are possible only from the top internal state, while `down' transitions are mandated upon any toxicity regardless of internal state. Using standard geometric-series formula to ``back out'' from $\boldsymbol{\pi}^{\textrm{ex.}}_{m(k-1)}$ to $\boldsymbol{\pi}_m$ yields the stationary adjacent-level ratio of the marginal allocation distribution $\boldsymbol{\pi}$:
+\noindent where $\pi_{m+1}$ is the marginal allocation frequency at $d_{m+1}$. In words, `up' transitions are possible only from the top internal state, while `down' transitions are mandated upon any toxicity regardless of internal state. Using standard geometric-series formula to ``back out'' from $\pi^{\textrm{(states)}}_{m(k-1)}$ to $\pi_m$ yields the stationary adjacent-level ratio of the marginal allocation distribution $\boldsymbol{\pi}$:
 
 \begin{equation}\label{eq:krgamma}
 \lambda_m=\frac{F_m\left(1-F_m\right)^{k}}{F_{m+1}\left[1-\left(1-F_m\right)^{k}\right]}.
 \end{equation}
 
-This ratio is monotone decreasing in $m$, conforming to the Durham-Flournoy conditions. The $k$-in-a-row balance point can now be calculated; indeed, it is the one found by Wetherill (\ref{eq:krtarget}). It is also identical to the balance point of GUD$_{(k,0,1)}$. The same unimodality and mode-location properties w.r.t. $x^*$ shown for $\boldsymbol{\pi}$ of the classical UD and BCD, hold for $k$-in-a-row as well \citep{Oron:Hoff:thek:2009}. Note that for finite $n$, the marginal transition probabilities are very cumbersome to calculate and would depend upon the starting point; it is for the $k$-in-a-row design that the $n\to\infty$ limit terminology is needed in Definition~\ref{def:pxqx}.
+This ratio is monotone decreasing in $m$, conforming to the Durham-Flournoy conditions. The $k$-in-a-row balance point can now be calculated; indeed, it is the one found by Wetherill (\ref{eq:krtarget}). It is also identical to the balance point of GUD$_{(k,0,1)}$. The same unimodality and mode-location properties with respect to $x^*$ shown for $\boldsymbol{\pi}$ of the classical UD and BCD, hold for $k$-in-a-row as well \citep{Oron:Hoff:thek:2009}. Note that for finite $n$, the marginal transition probabilities are very cumbersome to calculate and would depend upon the starting point; it is for the $k$-in-a-row design that the $n\to\infty$ limit terminology is needed in Definition~\ref{def:pxqx}.
 
 \subsection{BCD Extensions}
 
 The versatile framework of BCD naturally lends itself to further extensions. \cite{Bald:Bort:Giov:2008} generalized group UD for any user-specified $\Gamma$, by adding a biased coin to the dose allocation procedure. \cite{Flou:aran:1998} proposed the use of an urn model to integrate parallel BCD runs, helping shorten experiment duration. This strategy is also useful when clinical trials are performed at different locations.
 
-\citep{Bort:Giov:Upan:2005} developed a second order Markovian up-and-down rule. Let two coins have $\Pr\{\textrm{heads}\}$ equal to $b_1$ and $b_2$, respectively, and let $X_i=d_m$. Then
+\cite{Bort:Giov:Upan:2005} developed a second order Markovian up-and-down rule. Let two coins have $\Pr\{\textrm{heads}\}$ equal to $b_1$ and $b_2$, respectively, and let $X_i=d_m$. Then
 
 \begin{equation*}
 X_{i+1}=
@@ -508,8 +508,7 @@ d_m &\textrm{otherwise.}
 \end{cases}
 \end{equation*}
 %
-Bortot and Giovagnoli derive $\boldsymbol{\pi}$, and show that it is unimodal for increasing $F(x)$ by the Durham--Flournoy
-conditions and if $(1-F^*)b_1+F^*b_2=F^*/(1-F^*)$. However, their simulations indicate only a modest estimation performance improvement over first-order BCD.
+Bortot and Giovagnoli derived $\boldsymbol{\pi}$, and showed that it is unimodal for increasing $F(x)$ by the Durham--Flournoy conditions (see Sec.~\ref{sec:balpoint}) and if $(1-F^*)b_1+F^*b_2=F^*/(1-F^*)$. However, their simulations indicate only a modest estimation performance improvement over first-order BCD.
 
 Because there is so much flexibility in constructing biased coin designs, cite{Bort:Giov:Upan:2005} also examined a generalized first-order approach in order to study their properties. Let there be two coins having $\Pr\left(\textrm{heads}\right)$ equal to $b_1$ and $b_2$. Then
 \begin{equation}\label{eq:BortotCombo}
@@ -517,19 +516,19 @@ X_{i+1}=
 \begin{cases}
 d_{m+1} &\textrm{if $Y_i=0$ and coin 1 yields heads};\\
 d_{m-1} &\textrm{if $Y_i=1$ and coin 2 yields heads};\\
-d_{m} &\textrm{if $Y_i=0$ and coin 1 yields tails}\\
-        &\textrm{or $Y_i=1$ and coin 2 yields tails.}
+d_{m} &\textrm{if $Y_i=0$ and coin 1 yields tails}\ldots\\
+        &\ldots\textrm{or $Y_i=1$ and coin 2 yields tails.}
 \end{cases}
 \end{equation}
 \noindent The balance point maintains
 \begin{equation*}
 F^*b_2=\left(1-F^*\right)b_1;\ \ F^*=b_1/(b_1+b_2).
 \end{equation*}
-\noindent Setting $b_2=1$ yields Durham and Flournoy's BCD. A family of generalized BCDs for the same $\Gamma$ can be created by setting $b_1(1-\Gamma)=b_2\Gamma,\ b_2\in [0,1]$. Although all members of the family share the same balance point, they differ in other properties, as described below.
+\noindent Setting $b_2=1$ yields Durham and Flournoy's BCD. A family of generalized BCDs for the same $\Gamma$ can be created by setting $$\frac{b_2}{b_1}=\frac{1-\Gamma}{\Gamma},\ b_2\in [0,1],$$ so it can be indexed by a single `coin-toss' parameter. Although all members of the family share the same balance point, they differ in other properties, as described below.
 
 \subsection{Comparing UD Designs}
 
-With several UD variants to choose from for estimating a given quantile, some ways to compare UD designs are needed. An obvious comparison criterion is estimation performance -- e.g., mean square error (MSE) of the quantile estimates. Since estimation is affected by a variety of factors, at present this bottom-line metric can only be gauged via simulation studies. A more didactic approach is to consider individual properties, and find \emph{theoretical} relationships between designs for these properties. Some properties suggested and examined by researchers are
+With several UD variants to choose from for estimating a given quantile, some ways to compare UD designs are needed. An obvious comparison criterion is estimation performance -- e.g., mean square error (MSE) of the quantile estimates. Since estimation is affected by a variety of factors, at present this practical metric can only be gauged via simulation studies. A more didactic approach is to consider individual properties, and find \emph{theoretical} relationships between designs for these properties. Some properties suggested and examined by researchers are
 
 \begin{itemize}
 \item Convergence rates of the dose-allocation process and of cumulative visit frequencies;
@@ -539,19 +538,19 @@ With several UD variants to choose from for estimating a given quantile, some wa
 
 \subsubsection{Convergence Rates}
 
-Bortot and Giovagnoli showed that for the family of generalized BCDs of the form (\ref{eq:BortotCombo}) having the same $\Gamma$, the TPM can be rewritten as $\mathbf{P}=\mathbf{I}+b_2\mathbf{Q}$, where $\mathbf{I}$ is the identity matrix and $\mathbf{Q}$ does not depend upon $b_1,b_2$, the biased-coin probabilities. The asymptotic allocation variance is a decreasing function of $b_2$, and therefore Durham and Flournoy's BCD ($b_2=1$) is the minimum-asymptotic-variance member of this family, meaning that (neglecting initial conditions) its cumulative allocation frequencies will achieve a pre-specified precision criterion fastest (see Section~\ref{sec:asymvar}). Moreover, the geometric rate of convergence to stationary behavior increases with increasing $b_2$, up to a certain $b_2^\textrm{(max.)}$, which in numerical studies by Bortot and Giovagnoli tended to be greater than $1$. Thus, with initial conditions considered, BCD's convergence advantage over its two-coin extensions is even more pronounced.
+\cite{Bort:Giov:Upan:2005} showed that for the family of generalized BCDs of the form (\ref{eq:BortotCombo}) having the same $\Gamma$, the TPM can be rewritten as $\mathbf{P}=\mathbf{I}-b_2\mathbf{Q}$, where $\mathbf{I}$ is the identity matrix and $\mathbf{Q}$ does not depend upon $b_2$. The asymptotic allocation variance is a decreasing function of $b_2$, and therefore Durham and Flournoy's BCD ($b_2=1$) is the minimum-asymptotic-variance member of this family, meaning that (neglecting initial conditions) its cumulative allocation frequencies will achieve a pre-specified precision criterion most quickly (see Section~\ref{sec:asymvar}). Moreover, the geometric rate of convergence to stationary behavior increases with increasing $b_2$, up to a certain $b_2^\textrm{(max.)}$, which in numerical studies by \cite{Bort:Giov:Upan:2005} tended to be greater than $1$. 
 
 \cite{Oron:Hoff:thek:2009} found the following result comparing the convergence of $k$-in-a-row with the analogous group UD design.
 
-\begin{thm}\label{thm:krgudconv} Consider a $k$-in-a-row and a GUD$_{(k,0,1)}$ design with the same $k,\mathcal{X}$, and dose-toxicity curve $F$. Then the $k$-in-a-row design converges faster to its stationary behavior.\end{thm}
+\begin{thm}\label{thm:krgudconv} Consider a $k$-in-a-row and a GUD$_{(k,0,1)}$ design with the same $k,\mathcal{X}$, and dose-toxicity curve $F$. Then the $k$-in-a-row design converges more quickly to its stationary behavior.\end{thm}
 
-\noindent The  proof appears in \cite{Oron:Hoff:thek:2009}. It relies upon the identification of the subset of $k$-in-a-row's $\left\{X_n\right\}$ that contains only the zero-internal-state points, as a first-order Markov chain that includes all physical dose transitions in $\left\{X_n\right\}$, and has a TPM identical to the condensed form of GUD$_{(k,0,1)}$. Intuitively, while both $k$-in-a-row and GUD$_{(k,0,1)}$ need $k$ non-toxicities to escalate, the former can de-escalate after a single subject, while the latter always requires $k$ responses due to its use of cohorts. This gives  $k$-in-a-row a modest but persistent edge.
+\noindent The proof appears in \cite{Oron:Hoff:thek:2009}. It relies upon the identification of the subset of $k$-in-a-row's experimental trajectory $\left\{X_n\right\}$ that contains only the zero-internal-state points as a first-order Markov chain that includes all physical dose transitions in $\left\{X_n\right\}$, and has a TPM identical to the condensed form of GUD$_{(k,0,1)}$. Intuitively, while both $k$-in-a-row and GUD$_{(k,0,1)}$ need $k$ non-toxicities to escalate, the former can de-escalate after a single subject, while the latter always requires $k$ responses due to its use of cohorts. This gives  $k$-in-a-row a modest but persistent edge in convergence rate.
 
-In simulations, $k$-in-a-row also held a pervasive and somewhat larger advantage over BCD tuned to the same $x^*$. BCD designs took $10-70\%$ more subjects than $k$-in-a-row to reach the ``$99\%$ stationary'' benchmark defined in Section~\ref{sec:geom} \citep{Oron:Hoff:thek:2009}.
+In simulations, $k$-in-a-row also held a pervasive and somewhat larger advantage over BCD tuned to the same $x^*$. BCD designs took $10\%-70\%$ more subjects than $k$-in-a-row to reach the ``$99\%$ stationary'' benchmark defined in Section~\ref{sec:geom} \citep{Oron:Hoff:thek:2009}.
 
 \subsubsection{``Peakedness'' of $\boldsymbol{\pi}$}
 
-Giovagnoli and Pintacuda \citep{Giov:Pint:Pint:prop:1998} introduce the concept of ``peakedness'' as an easy-to-analyze measure of precision for discrete unimodal distributions, of the type generated by UD designs. As $\boldsymbol{\pi}$ becomes more ``peaked'', excursions away from $x^*$ are less frequent, and estimation efficiency of $F^{-1}\left(\Gamma\right)$ generally improves.
+\cite{Giov:Pint:Pint:prop:1998} introduced the concept of ``peakedness'' as an easy-to-analyze measure of precision for discrete unimodal distributions, of the type generated by UD designs. 
 
 \begin{defn}\label{def:peak}
 For two UD designs $D_1,D_2$ over the same $\mathcal{X}$ and having the same balance point $x^*$, $D_1$'s asymptotic distribution is \emph{more ``peaked''} if it increases more quickly to the left of $x^*$ and decreases more quickly to the right of $x^*$. That is, if one considers $\lambda^{(D_1)}_m,\lambda^{(D_2)}_m$, the adjacent-level ratio of $\boldsymbol{\pi}$ under designs $D_1,D_2$ respectively, then
@@ -564,9 +563,11 @@ For two UD designs $D_1,D_2$ over the same $\mathcal{X}$ and having the same bal
 where $m^*$ denotes the dose level immediately below $x^*$.
 \end{defn}
 
-Consider the family of symmetric group UD designs GUD$_{(s,l,u-l)}$, a family designed to estimate the median. \cite{Oron07} proved that designs of this family with smaller $l$ (i.e., ones with a higher probability of staying at the same dose) have a more peaked $\boldsymbol{\pi}$ than designs with larger $l$ and the same $s$. Conversely, it appears that designs with larger $l$ converge faster, for reasons similar to those making BCD the fastest-converging in the generalized-BCD two-coin family.
+As the stationary distribution $\boldsymbol{\pi}$ becomes more ``peaked'', excursions away from $x^*$ are less frequent, and estimation efficiency of $F^{-1}\left(\Gamma\right)$ generally improves. Therefore, all other things being equal, a design with a more ``peaked'' $\boldsymbol{\pi}$ is preferable.
 
-For comparison of `peakedness' across UD families, ... prove the following results. Proofs are in ref. \cite{Oron:Hoff:thek:2009}.
+Consider the family of symmetric group UD designs GUD$_{(s,l,u-l)}$, a family designed to estimate the median (see Sec.~\ref{sec:gud}. \cite{Oron07} proved that designs of this family with smaller $l$ (i.e., ones with a higher probability of staying at the same dose) have a more peaked $\boldsymbol{\pi}$ than designs with larger $l$ and the same $s$. On the other hand, it appears that designs with larger $l$ converge faster, although a proof has not been found.
+
+For comparison of `peakedness' across UD families, \cite{Oron:Hoff:thek:2009} prove the following results.
 
 \begin{thm}\label{thm:peak} (i) $k$-in-a-row designs generate $\boldsymbol{\pi}$ that are more peaked than those of BCD designs over the same $\mathcal{X}$ and with the same $x^*$.
 
