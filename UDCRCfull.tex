@@ -16,31 +16,31 @@
 \section{Introduction}\label{sec:intro}
 \subsection{Background and Motivation}
 
-Up-and-down (UD) dose-finding designs are used extensively in a variety of scientific and engineering fields. The first technical documents describing UD date to the 1940's, and involve military explosive testing to find the optimal height from which to drop a bomb  \citep{Ande:McCa:Tuke:Stai:1946,Dixo:Mood:Amet:1948}, and hearing-threshold determination \citep{vonB:anew:1947}. In both of these applications, UD is still the method of choice. Other common UD applications include failure-threshold determination in electrical and material engineering \citep{Lago:Sons:Comp:2004}, and finding the median effective dose (ED$_{50}$) in anesthesiology \citep{Pace:styl:tutor:2007}. As these examples suggest, ``dose-finding'' is a general term to describe experiments whose outcomes are binary (``yes/no''), conducted to find the treatment that would trigger a ``yes'' response at a pre-specified frequency. UD is a family of \emph{sequential} dose-finding designs, meaning that treatments are ordered in time, and each treatment (except the first one) is determined by previous outcomes rather than pre-determined before the experiment's start.
+Up-and-down (UD) dose-finding designs are used extensively in a variety of scientific and engineering fields. The first technical documents describing UD designs date to the 1940's, and involve military explosive testing to find the optimal height from which to drop a bomb  \citep{Ande:McCa:Tuke:Stai:1946,Dixo:Mood:Amet:1948}, and hearing-threshold determination \citep{vonB:anew:1947}. In both of these applications, UD designs are still the method of choice. Other common UD applications include failure-threshold determination in electrical and material engineering \citep{Lago:Sons:Comp:2004}, and finding the median effective dose (ED$_{50}$) in anesthesiology \citep{Pace:styl:tutor:2007}. As these examples suggest, ``dose-finding'' is a general term to describe experiments whose outcomes are binary (``yes/no''), conducted to find the treatment that would trigger a ``yes'' response at a pre-specified frequency. UD procedures comprise a family of \emph{sequential} dose-finding designs, meaning that treatments are ordered in time, and each treatment (except the first one) is determined by previous outcomes rather than pre-determined before the experiment's start.
 
-In numerous applications, UD is considered a standard method \citep{JSME81, ASTM:Stan:1991,OECD:Revi:1998,NIEH:NIH:2001}. Prominent among these are animal toxicity studies, which attempt to estimate the median lethal dose (LD$_{50}$) of various toxins while sacrificing as few animals as possible. Toxicity is also the outcome of interest in first-in-human (Phase~I) clinical trials, which is the dose-finding problem attracting the most methodological attention and innovation in recent years. UD is related to the most popular Phase~I design in current use, and plays an important role in the statistical debate regarding Phase~I design choices -- as detailed in Section~\ref{sec:other}.
+In numerous applications, UD designs are a standard method \citep[e.g.,][]{JSME81, ASTM:Stan:1991,OECD:Revi:1998,NIEH:NIH:2001}. Prominent among these are animal toxicity studies, which attempt to estimate the median lethal dose (LD$_{50}$) of various toxins while sacrificing as few animals as possible. Toxicity is also the outcome of interest in first-in-human (Phase~I) clinical trials, which are dose-finding experiments attracting considerable methodological attention and innovation. UD designs are related to the most popular Phase~I design in current use, and play an important role in the statistical debate regarding Phase~I design choices -- as detailed in Section~\ref{sec:other}.
 
 One obstacle to the proliferation of UD usage and best practices has been the lack of standard references, such as exist for statistical methods of comparable popularity.  In this chapter we attempt to provide a condensed version of such a standard reference, presenting an unprecedented compilation of UD methodological knowledge. The presentation is closer to a textbook than a review article. This includes the definition of numerous terms we deem crucial to the understanding and proper use of UD designs.
 
 %may be Markovian or non-Markovian in structure.  Markovian procedures have many well~known analytic properties that can be exploited in the design of dose--finding procedures.  Thus we describe the simple Markovian random walk designs before others.
 
-The remainder of the Introduction will present the basic terminology, and define some essential concepts. Section~\ref{sec:tour} explores these concepts and and demonstrates some basic UD properties, using two of the simplest UD designs. Section~\ref{sec:extens} presents UD design variants whose properties are more complicated, ways to compare UD designs, and some results from such comparisons. Section~\ref{sec:est} discusses UD estimation methods. Section~\ref{sec:other} provides a quick overview of other popular approaches to dose-finding, and contrasts them with UD. The chapter ends with a brief summary, some general design recommendations and historical notes.
+The remainder of the Introduction will present the basic terminology, and define some essential concepts. Section~\ref{sec:tour} explores these concepts and and demonstrates some basic UD properties, using two of the simplest UD designs. Section~\ref{sec:extens} presents UD design variants whose properties are more complicated, ways to compare UD designs, and some results from such comparisons. Section~\ref{sec:est} discusses UD estimation methods. Section~\ref{sec:other} provides a quick overview of other popular approaches to dose-finding, and a basic comparison between their properties and those UD designs. The chapter ends with a brief summary, some general design recommendations and historical notes.
 
 \subsection{Basic Terminology}\label{sec:terminol}
 
 One must begin with the definition of UD itself, because the term has been used rather loosely by different authors. We prefer the consensus interpretation of the term among modern UD methods researchers: up-and-down designs are dose-finding designs which, under simple assumptions, generate dose-assignment sequences that are \emph{Markov chains} over a discrete set of doses, $\mathcal{X}$. This chapter does not cover methods that operate on a continuous dose space.
 
-Without loss of generality, we refer to treatment magnitudes as \emph{doses}, and to experimental outcomes as \emph{toxicities}. Let $Y_i = 1$ if the $i$-th subject (a plant, animal or human) of a dose-finding experiment exhibits toxicity, and $0$ otherwise ($i=1,\ldots ,n$). Given that the dose to which the $i$-th subject was exposed is $X_i=x$, the probability of toxicity is $F(x) = P\left\{Y_i=1\mid X_i =x\right\}$. Despite the experiment using only a discrete set of doses, the dose-magnitude variable itself, $x$, is assumed to be continuous, and the toxicity rate is assumed to increase continuously with increasing $x$.  The experiment's goal is to estimate the exact dose $x$ (on a continuous scale) that produces a fixed target toxicity rate $\Gamma=P\left\{Y=1\mid X=x\right\}, \ \ \Gamma\in(0,1)$. This can be expressed as estimation of the quantile  $F^{-1}(\Gamma)$ of a cumulative distribution function: the dose-toxicity curve $F(x)$.  The density function $f(x)$ associated with $F(x)$ is interpretable as the distribution of \emph{toxicity thresholds} of the population under study. We focus on $\Gamma\leq 0.5$, the range of target rates used for most toxicity studies.
+Without loss of generality, we refer to treatment magnitudes as \emph{doses}, and to experimental outcomes as \emph{toxicities}. Let $Y_i = 1$ if the $i$-th subject (a plant, animal or human) of a dose-finding experiment exhibits toxicity, and $0$ otherwise ($i=1,\ldots ,n$). Given that the dose to which the $i$-th subject was exposed is $X_i=x$, the probability of toxicity is $F(x) = P\left\{Y_i=1\mid X_i =x\right\}$. Despite the experiment using only a discrete set of doses, the dose-magnitude variable itself, $x$, is assumed to be continuous, and the toxicity rate is assumed to increase continuously with increasing $x$.  The experiment's goal is to estimate the exact dose $x$ (on a continuous scale) that produces a fixed target toxicity rate $\Gamma=P\left\{Y=1\mid X=x\right\}, \ \ \Gamma\in(0,1)$. This can be expressed as estimation of the quantile  $F^{-1}(\Gamma)$ of a cumulative distribution function that models the dose-toxicity curve $F(x)$.  The density function $f(x)$ associated with $F(x)$ is interpretable as the distribution of \emph{toxicity thresholds} of the population under study. We focus on $\Gamma\leq 0.5$, the range of target rates used for most toxicity studies.
 
-The general defining characteristics of an UD design are
+The general defining characteristics of an UD design follow:
 \begin{enumerate}
-\item $X_1,\ldots,X_n$ are drawn from a fixed set of possible dose levels $$\mathcal{X} =\left\{d_1,\ldots ,d_M : d_1 <\cdots <d_M\right\}.$$
-\item Suppose that $X_i=d_m$, then $X_{i+1}\in\{d_{m-1},d_m,d_{m+1}\}$, according to simple constant rules based on recent toxicity responses; hence the name \emph{``Up-and-Down''}. This means that the Markov chains generated by UD designs are also \emph{random walks}.
+\item $X_1,\ldots,X_n$ are drawn from a fixed set of $M$ possible dose levels which is denoted by $$\mathcal{X} =\left\{d_1,\ldots ,d_M : d_1 <\cdots <d_M\right\}.$$
+\item Suppose that $X_i=d_m$, then $X_{i+1}\in\{d_{m-1},d_m,d_{m+1}\},i\in\left\{1,\ldots ,n\right\}$ according to simple constant rules based on recent toxicity responses; hence the name \emph{``Up-and-Down''}. This means that the Markov chains generated by UD designs are also \emph{random walks}.
 \end{enumerate}
 
 \subsection{The Transition Probability Matrix}\label{sec:tpm}
 
- Given that a subject receives dose $d_m$, denote the probability that the next subject receives dose $d_{m-1},d_m$, or $d_{m+1}$ by $p_{m,m-1},p_{mm},p_{m,m+1}$, respectively. These  \emph{transition probabilities} obey the constraints $p_{m,m-1}+p_{mm}+p_{m,m+1}=1$ and the boundary conditions $p_{1,0}=p_{M,M+1}=0$. A specific set of UD rules enables the symbolic calculation of these probabilities, usually as a function of $F(x)$. Assume for now that transition probabilities are fixed in time, depending only upon the current allocation and its outcome, i.e., upon $\left(X_i,Y_i\right)$ (and through them, indirectly upon $F(x)$), and possibly also on a set of fixed parameters. The probabilities are then best represented via a tri-diagonal transition probability matrix (TPM) $\mathbf{P}$:
+ Given that a subject receives dose $d_m$, denote the probability that the next subject receives dose $d_{m-1},d_m$, or $d_{m+1}$ by $p_{m,m-1},p_{mm}$ or $p_{m,m+1}$, respectively. These  \emph{transition probabilities} obey the constraints $p_{m,m-1}+p_{mm}+p_{m,m+1}=1$ and the boundary conditions $p_{1,0}=p_{M,M+1}=0$. A specific set of UD rules enables the symbolic calculation of these probabilities, usually as a function of $F(x)$. Assume for now that transition probabilities are fixed in time, depending only upon the current allocation and its outcome, i.e., upon $\left(X_i,Y_i\right)$ and through them upon $F(x)$), and possibly on a set of fixed parameters. The probabilities are then best represented via a tri-diagonal transition probability matrix (TPM) $\mathbf{P}$:
 
 \begin{equation}\label{eq:genericPmat}
 \bf{P}=\left(
@@ -62,36 +62,37 @@ p_{jm}&=p_{jm}(1)=\Pr\{X_{i+1}=d_m|X_i=d_j\};\\
 p_{jm}(l)&=\Pr\{X_{i+l}=d_m|X_i=d_j\};\,\,\,(j,m)\in\left\{1,\ldots,M\right\}.
 \end{array}
 \end{equation*}
-These probabilities can be calculated via matrix multiplication: $p_{jm}(l)=\left(\mathbf{P^l}\right)_{jm}$, where $\mathbf{P^l}$ denotes the matrix $\mathbf{P}$ multiplied by itself $l$ times. For a given $j,m$ pair, if $p_{jm}(l)>0$ and $p_{mj}(l)>0$  for some $l>0$, then dose levels $d_j,d_m$ are said to \emph{communicate}. If all levels communicate with each other, the matrix $\mathbf{P}$ is called \emph{regular}. Under realistic conditions, the TPMs of typical UD designs are regular.
+These probabilities can be calculated via matrix multiplication: $p_{jm}(l)=\left(\mathbf{P^l}\right)_{jm}$, where $\mathbf{P^l}$ denotes the matrix $\mathbf{P}$ multiplied by itself $l$ times. For a given $j,m$ pair, if $p_{jm}(l)>0$ and $p_{mj}(l)>0$  for some $l>0$, then dose levels $d_j,d_m$ are said to \emph{communicate}. If all levels communicate with each other, the matrix $\mathbf{P}$ is called \emph{regular}. Under realistic conditions, the TPMs of typical UD designs are regular.  This condition guarantees the existence of positive stationary dose-allocation frequencies (see Section \ref{sec:pi}) and is a condition for the central limit theorem (see equation (\ref{eq:CLT})). 
 
 %Filling $\mathbf{P}$ with actual numbers requires exact knowledge of the dose-toxicity function $F(x)$, which of course is not available (otherwise, the experiment is unnecessary!). However, many UD properties can be deduced and calculated based on the simple assumption that $F(x)$ increases from 0 to 1 with increasing dose.
 
-\subsection{The UD Balance Point}\label{sec:balpoint}
+\subsection{The Up--and--Down Design's Balance Point}\label{sec:balpoint}
 
-UD designs generate Markov chains with a central tendency, meaning that dose assignments tend to meander back and forth around some typical dose that can be calculated from design parameters \citep{Durh:Flou:rand:1994,Hugh:Rand:1995}. This dose was recently termed the \emph{balance point} by \cite{Oron:Hoff:thek:2009}. While the term and some related methodological considerations are recent, the intuition giving rise to designs with balance points is as old as the UD design itself.
+UD designs generate Markov chains with a central tendency, meaning that dose assignments tend to meander back and forth around some dose that can be calculated from the design parameters \citep{Durh:Flou:rand:1994,Hugh:Rand:1995}. This dose was recently termed the \emph{balance point} by \cite{Oron:Hoff:thek:2009}. While the term and some related methodological considerations are recent, the intuition giving rise to designs with balance points is as old as the UD design itself.
 
-Define the continuous `up' and `down' transition functions $p(x),q(x)$, respectively:
+Continuous `up' and `down' transition functions $p(x)$ and $q(x)$ are now defined such that
+$\{p_{m;m+1}\}$ and $\{p_{m;m-1}\}$, respectively, are points on these curves.
 
 \begin{defn}\label{def:pxqx}
-Consider an Up-and-Down design with an `up' transition probability  $p_{m,m+1}$ that might vary over time. If, in the interior of $\mathcal{X}$ (i.e., $1\leq m<M)$, $$\lim_{n\to\infty}\left(p_{m,m+1}\right)=g_{_\mathrm{up}}\left(d_m\right),$$
-where $n$ is the sample size and $g_{_\mathrm{up}}\left(d_m\right)$ is an algebraic function of $d_m$  \underline{only}, then the extension of $g_{_\mathrm{up}}\left(d_m\right)$ onto its natural continuous domain $\mathcal{D}{_\mathrm{up}}\supseteq\left[d_1,d_M\right]$ will be called \textbf{the 'up' transition function $p(x)$, $x\in\left[d_1,d_M\right]$.} The '\emph{down}' function $q(x)$ is similarly defined from the `down' transition probability $p_{m,m-1}, 1<m\leq M$.
+Consider an Up-and-Down design with an `up' transition probability  $p_{m,m+1}$ that might vary over time, i.e., with the accruing sample size $n\geq 1$.\footnote{A terminology note: for most designs discussed in this chapter, the random-walk transition probabilities are constant in time, and therefore the use of ``$\lim_{n\to\infty}$'' in Definition~\ref{def:pxqx} is redundant. However, Section~\ref{sec:kr} presents a widely-used UD method whose dose-transition probabilities only stabilize in the $n\to\infty$ limit. Therefore we use a limit notation.} If, in the interior of $\mathcal{X}$ $($i.e., $1\leq m<M)$, $$\lim_{n\to\infty}\left(p_{m,m+1}\right)=g_{_\mathrm{up}}\left(d_m\right),$$
+where $g_{_\mathrm{up}}\left(d_m\right)$ is an algebraic function of $d_m$  \underline{only}, then the extension of $g_{_\mathrm{up}}\left(d_m\right)$ onto its natural continuous domain $\mathcal{D}{_\mathrm{up}}\supseteq\left[d_1,d_M\right]$ will be called \textbf{the 'up' transition function $p(x)$, $x\in\left[d_1,d_M\right]$.} The '\emph{down}' function $q(x)$ is similarly defined from the `down' transition probability $p_{m,m-1}, 1<m\leq M$.
 \end{defn}
 
-In words, $p(x)$ and $q(x)$ retain the same functional form as $p_{m,m+1}$ and $p_{m,m-1}$, respectively, but are defined on a continuous domain that includes $\mathcal{X}$, rather than only on $\mathcal{X}$ itself.\footnote{A terminology note: for most designs discussed in this chapter, the random-walk transition probabilities are constant in time, and therefore the use of ``$\lim_{n\to\infty}$'' in Definition~\ref{def:pxqx} is redundant. However, Section~\ref{sec:kr} presents a widely-used UD method whose dose-transition probabilities only stabilize in the $n\to\infty$ limit. Therefore we use a limit notation.}
+In words, $p(x)$ and $q(x)$ are defined on a continuous domain that includes $\mathcal{X}$ while $\{p_{m,m+1}\}$ and $\{p_{m,m-1}\}$ are defined only on $\mathcal{X}$ itself.
 
-As will be seen below, for practically all UD designs the transition probabilities are simple functions of $F(x)$ evaluated on $\mathcal{X}$. Therefore, their continuous extension as $p(x),q(x)$ is straightforward, and enables a useful definition for the balance point:
+As will be seen below, for practically all UD designs the transition probabilities are simple functions of the dose-toxicity rate function $F(x)$ evaluated on $\mathcal{X}$. Therefore, their continuous extension as $p(x)$ and $q(x)$ is straightforward, and enables a useful definition for the balance point:
 
-\begin{defn}\label{def:targ}  Consider an Up-and-Down design with `up' and `down' functions $p(x),q(x)$, respectively. If $p(x)$ is monotone decreasing and $q(x)$ monotone increasing in $x$,
-then the Up-and-Down\ \  {\bf balance point} is the dose $x^*$ such that
+\begin{defn}\label{def:targ}  Consider an Up-and-Down design with `up' and `down' functions $p(x)$ and $q(x)$, respectively. If $p(x)$ is monotone decreasing and $q(x)$ monotone increasing in $x$,
+then the Up-and-Down\ \  \emph{balance point} is the dose $x^*$ such that
 \begin{equation}\label{eq:deftarget}
 x^*=\mathrm{arg}_x \left\{p(x^*)=q(x^*)\right\}.
 \end{equation}
 The toxicity rate at $x^*$ will be denoted $F^*$, i.e., $F(x^*)=F^*$.
 \end{defn}
 
-The dual monotonicity condition in Definition~\ref{def:targ} - in words, as the dose increases the `up' probability goes down while the `down' probability goes up --  will be referred to as \emph{the Durham-Flournoy conditions}, after the first study to specify them in generic form \citep{Durh:Flou:up-a:1995}. Designs that meet it generate a central tendency around their balance point.
+The dual monotonicity condition in Definition~\ref{def:targ} - in words, as the dose increases, the `up' probability goes down while the `down' probability goes up --  will be referred to as \emph{the Durham-Flournoy conditions}, after the first study to specify them in generic form \citep{Durh:Flou:rand:1994,Durh:Flou:up-a:1995}. As shown below in Theorem~\ref{thm:mode}, designs that meet these conditions generate a central tendency around their balance point.
 
-Obviously, one would like the balance point to be close to the experiment's designated target quantile. Indeed, for many designs \  $\Gamma=F^*\equiv F(x^*)$. However, as will be seen below, in many cases the two are only approximately equal. Figure~\ref{fig:pq} theoretically illustrates $p(x),q(x)$ and the balance point, for the two UD designs presented in Section~\ref{sec:tour} .
+In UD experiments, one would like the center of the dose-allocation distribution to be close to the experiment's designated target quantile $F^{-1}(\Gamma)$. This can be accomplished by judicious selection of design parameters, so that  $\Gamma\approx F^*\equiv F(x^*)$.  A theoretical example for $p(x),q(x)$ and the balance point is shown in Figure~\ref{fig:pq}.
 
 \begin{figure}
 \begin{center}
@@ -102,9 +103,9 @@ Obviously, one would like the balance point to be close to the experiment's desi
 
 In dose-finding in general and in UD designs in particular, it is easy to focus on the central tendency and on asymptotic properties, and forget the magnitude of sampling variability that might be observed in practice. While UD designs do guarantee an $x^*$-centered random walk, it is still a random walk. Since most dose-finding applications use small samples, the relative magnitude of sampling variability is often rather substantial. In order to keep the reader cognizant of this variability, and to illustrate the concept of a random walk on $\mathcal{X}$, Figure~\ref{fig:traject} shows the experimental trajectories generated by three $n=30$ random draws from the same toxicity-threshold distribution, on an $M=8$ dose set, for each of the two designs described in Section~\ref{sec:tour}. The plots follow the graphical conventions common to dose-finding studies, with filled circles representing toxicities and empty ones non-toxicities. Balance points are denoted by dashed horizontal lines. The squares denote \emph{reversal points} in the experimental trajectories, whose properties are explored later.
 
-We now describe a few first-order designs, called thus because they generate first-order Markov chains.
+We now describe a few first-order designs, called thus because they generate first-order Markov chains. For these chains, the probability of transiting to an adjacent dose in $\mathcal{X}$ depends upon the dose-allocation history, only through the current dose level and the current experimental outcome.
 
-\section{A Tour Through UD World: First-Order Designs}\label{sec:tour}
+\section{A Tour Through First-Order Up-and-Down Designs}\label{sec:tour}
 \subsection{The Classical Up--and--Down Rule}
 
 The original (hereafter: ``classical'') UD design follows this rule: given $X_i=d_m$,
@@ -125,7 +126,7 @@ p_{m,m+1}&=P\{Y_i=0|X_i=d_m\}=1-F(d_m)\\
 p_{m,m-1}&=P\{Y_i=1|X_i=d_m\}=F(d_m).
 \end{array}
 \end{equation}
-The balance point is simply
+The balance point is the dose $x^*$ whose toxicity rate $F^*$ obeys
 \begin{equation*}
 1-F^*=F^*\ \longrightarrow \   F^*=0.5.
 \end{equation*}
@@ -140,7 +141,7 @@ As expected from its symmetric transition rules, the classical UD design is best
 
 \subsection{Biased Coin Up-and-Down Designs}
 
-\subsubsection{Derman's Biased Coin}
+\subsubsection{Derman's Biased Coin Design}
 \cite{Derm:Nonp:1957} was the first to develop an UD extension for non-median percentiles. His design requires a random toss of a metaphoric ``coin'', with $b=P\{\textrm{heads}\}\in[0.5,1]$. Given $X_i=d_m$,
 \begin{equation*}
 X_{i+1}=
@@ -150,7 +151,7 @@ d_{m+1} &\textrm{if $Y_i=0$, or}\\
 d_{m-1} &\textrm{if $Y_i=1$ and `heads'.}
 \end{cases}
 \end{equation*}
-The balance point $x^*$ is
+The balance point $x^*$ is given by
 \begin{equation}\label{eq:dermanx*}
 \begin{array}{rcl}
 p(x^*)&=&q(x^*)\\
@@ -159,24 +160,24 @@ F^*=F\left(x^*\right) &=& \frac{1}{2b}\in[0.5,1].
 \end{array}
 \end{equation}
 
-For example, to concentrate the central tendency around $F^{-1}(2/3)$, set $b=0.75$. When $b=1$, the balance point is the median, and indeed this value makes Derman's design identical to classical UD. A mirror-image version of the design (i.e, de-escalate after a toxicity and toss a `coin' after a non-toxicity) can be used to estimate percentiles below the median.
+For example, to produce a central tendency around the dose $F^{-1}(2/3)$, set $b=0.75$. When $b=1$, the balance point is the median, and indeed this value makes Derman's design identical to the classical UD. A mirror-image version of the design (i.e, de-escalate after a toxicity and toss a `coin' after a non-toxicity) can be used to estimate percentiles below the median.
 
-\subsubsection{Durham \& Flournoy's  Biased Coin}
+\subsubsection{Durham and Flournoy's  Biased Coin Design}
 
 Derman's design has a practically unappealing property: if the coin points `tails', the experiment will move in the direction opposite to that indicated by the most recent response (i.e., the dose will escalate despite having just observed a toxic response). This is especially undesirable in clinical trials, where such transitions might actually halt the experiment due to safety concerns \citep{Neunsch08}. Not surprisingly, Phase~I researchers prefer designs that preclude such occurrences, which \cite{Cheung:coherent:05} called \emph{``incoherent''} dose transitions.\footnote{Not to be confused with the usage of ``coherence'' in Bayesian theory.}
 
-\cite{Durh:Flou:rand:1994} suggested a design that uses a biased coin -- but achieves the same goal of centering the dose-allocation distribution around any percentile without ``incoherent'' transitions. Given $X_i=d_m$, the next dose allocation will be
+\cite{Durh:Flou:rand:1994} suggested a design that uses a biased coin that centers the dose-allocation distribution around any percentile without ``incoherent'' transitions. Given $X_i=d_m$, the next dose allocation will be
 
 \begin{equation}\label{eq:DF_BCD}
 X_{i+1}=
 \begin{cases}
-d_{m+1} &\textrm{if $Y_i=0$ \& heads};\\
+d_{m+1} &\textrm{if $Y_i=0$ \& `heads'};\\
 d_{m-1} &\textrm{if $Y_i=1$};\\
-d_m &\textrm{if $Y_i=0$ \& tails}.\\
+d_m &\textrm{if $Y_i=0$ \& `tails'}.\\
 \end{cases}
 \end{equation}
 
-The `heads' probability $b$ can take any value in $[0,1]$. The balance point is
+The `heads' probability $b$ can take any value in $[0,1]$. The balance point is given by
 \begin{equation}\label{eq:bcdx*}
 \begin{array}{rcl}
     b\left(1-F^*\right) &=& F^*\\
@@ -184,7 +185,7 @@ The `heads' probability $b$ can take any value in $[0,1]$. The balance point is
 \end{array}
 \end{equation}
 
-Given a desired toxicity rate $\Gamma$, the `heads' probability must be $b=\Gamma/(1-\Gamma)$. For example, to estimate $F^{-1}(0.3)$ as is commonly used in Phase~I cancer trials, set $b=3/7$. Once again, setting $b=1$ makes this design identical to classical UD, and inverting the rules produces above-median balance points. Hereafter, we refer to this design simply as BCD.
+Given a desired toxicity rate $\Gamma$, the `heads' probability must be $b=\Gamma/(1-\Gamma)$. For example, set to estimate $F^{-1}(0.3)$ as is commonly used in Phase~I cancer trials, set $b=3/7$. Once again, setting $b=1$ makes this design identical to classical UD, and inverting the rules produces above-median balance points. Hereafter, we refer to this design simply as the BCD.
 
 The conditioning of dose escalation upon the outcome of a random draw in addition to a non-toxicity, keeps experimental trajectories at lower doses, on average, than the classical UD. In Figure~\ref{fig:traject} (bottom row), each BCD ``run'' with $b=1/3$ (meaning $\Gamma=0.25$) uses exactly the same toxicity thresholds as the classical UD trajectory shown immediately above it in the top row (all drawn randomly from a Gamma distribution). While the classical UD runs escalate rather easily to the upper half of the $M=8$ dose range, the BCD runs are confined mostly to the bottom half.
 
