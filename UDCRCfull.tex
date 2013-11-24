@@ -62,7 +62,7 @@ p_{jm}&=p_{jm}(1)=\Pr\{X_{i+1}=d_m|X_i=d_j\};\\
 p_{jm}(l)&=\Pr\{X_{i+l}=d_m|X_i=d_j\};\,\,\,(j,m)\in\left\{1,\ldots,M\right\}.
 \end{array}
 \end{equation*}
-These probabilities can be calculated via matrix multiplication: $p_{jm}(l)=\left(\mathbf{P^l}\right)_{jm}$, where $\mathbf{P^l}$ denotes the matrix $\mathbf{P}$ multiplied by itself $l$ times. For a given $j,m$ pair, if $p_{jm}(l)>0$ and $p_{mj}(l)>0$  for some $l>0$, then dose levels $d_j,d_m$ are said to \emph{communicate}. If all levels communicate with each other, the matrix $\mathbf{P}$ is called \emph{regular}. Under realistic conditions, the TPMs of typical UD designs are regular.  This condition guarantees the existence of positive stationary dose-allocation frequencies (see Section \ref{sec:pi}) and is a condition for the central limit theorem (see equation (\ref{eq:CLT})). 
+These probabilities can be calculated via matrix multiplication: $p_{jm}(l)=\left(\mathbf{P^l}\right)_{jm}$, where $\mathbf{P^l}$ denotes the matrix $\mathbf{P}$ multiplied by itself $l$ times. For a given $j,m$ pair, if $p_{jm}(l)>0$ and $p_{mj}(l)>0$  for some $l>0$, then dose levels $d_j,d_m$ are said to \emph{communicate}. If all levels communicate with each other, the matrix $\mathbf{P}$ is called \emph{regular}. Under realistic conditions, the TPMs of typical UD designs are regular.  This condition guarantees the existence of positive stationary dose-allocation frequencies (see Section \ref{sec:pi}) and is a condition for the central limit theorem (see equation (\ref{eq:CLT})).
 
 %Filling $\mathbf{P}$ with actual numbers requires exact knowledge of the dose-toxicity function $F(x)$, which of course is not available (otherwise, the experiment is unnecessary!). However, many UD properties can be deduced and calculated based on the simple assumption that $F(x)$ increases from 0 to 1 with increasing dose.
 
@@ -185,59 +185,57 @@ The `heads' probability $b$ can take any value in $[0,1]$. The balance point is 
 \end{array}
 \end{equation}
 
-Given a desired toxicity rate $\Gamma$, the `heads' probability must be $b=\Gamma/(1-\Gamma)$. For example, set to estimate $F^{-1}(0.3)$ as is commonly used in Phase~I cancer trials, set $b=3/7$. Once again, setting $b=1$ makes this design identical to classical UD, and inverting the rules produces above-median balance points. Hereafter, we refer to this design simply as the BCD.
+Given a desired toxicity rate $\Gamma$, the BCD balance point can made identical to $F^{-1}(\Gamma)$ by setting the `heads' probability to $b=\Gamma/(1-\Gamma)$. For example, for $\Gamma=0.3$ (commonly used in Phase~I cancer trials) set $b=3/7$. Once again, setting $b=1$ makes this design identical to the classical UD, and inverting the rules produces above-median balance points. Hereafter, we refer to this design simply as the BCD.
 
-The conditioning of dose escalation upon the outcome of a random draw in addition to a non-toxicity, keeps experimental trajectories at lower doses, on average, than the classical UD. In Figure~\ref{fig:traject} (bottom row), each BCD ``run'' with $b=1/3$ (meaning $\Gamma=0.25$) uses exactly the same toxicity thresholds as the classical UD trajectory shown immediately above it in the top row (all drawn randomly from a Gamma distribution). While the classical UD runs escalate rather easily to the upper half of the $M=8$ dose range, the BCD runs are confined mostly to the bottom half.
+The conditioning of dose escalation upon the outcome of a random draw in addition to a non-toxicity, keeps experimental trajectories at lower doses, on average, than the classical UD. In Figure~\ref{fig:traject} (bottom row), each BCD ``run'' with $b=1/3$ (i.e., $F^*=0.25$) uses exactly the same toxicity thresholds as the classical UD trajectory shown immediately above it in the top row (all drawn randomly from a Gamma distribution). While the classical UD runs escalate rather easily to the upper half of the $M=8$ dose range, the BCD runs are confined mostly to the bottom half.
 
-\subsection{The Asymptotic Dose-Allocation Distribution $\boldsymbol{\pi}$}\label{sec:pi}
+\subsection{The Asymptotic Dose--Allocation Distribution}\label{sec:pi}
 
-Because UD sequences of assigned doses $x_1,\ldots,x_n$ possess the properties of a Markov chain, as $n\to\infty$ the relative proportions of subjects assigned to each dose in $\mathcal{X}$ approach the \emph{asymptotic} or \emph{stationary allocation distribution} $\boldsymbol{\pi}=\left(\pi_1,\ldots,\pi_M\right)^{\prime};\ \ \sum_m \pi_m=1.$  If $\mathbf{P}$ is regular, then $\pi_m>0\ \forall m$. The distribution $\boldsymbol{\pi}$ can be found by solving $M$ the \emph{global balance equations}, mandating that the net ``probability flux'' in and out of each group of dose levels be zero under the assumption of stationarity.
-
-The tri-diagonal structure of $\mathbf{P}$ for first-order UD designs (\ref{eq:genericPmat}) greatly simplifies the global balance equations. Splitting $\mathcal{X}$ into two groups by ``cutting'' it down the middle between any two adjacent dose levels $d_m,d_{m+1}$ without loss of generality, the balance equations between the two groups simplify to
-
+Because UD sequences of assigned doses $x_1,\ldots,x_n$ possess the properties of a Markov chain, as $n\to\infty$ the relative proportions of subjects assigned to each dose in $\mathcal{X}$ approach the \emph{asymptotic} or \emph{stationary allocation distribution} $\boldsymbol{\pi}=\left(\pi_1,\ldots,\pi_M\right)^{\prime};\ \ \sum_m \pi_m=1.$  If $\mathbf{P}$ is regular, then $\pi_m>0\ \forall m$. The distribution $\boldsymbol{\pi}$ can be found by solving the $M$ \emph{balance equations}, which is greatly simplified by the tri-diagonal structure of $\mathbf{P}$ for first-order UD designs (\ref{eq:genericPmat}):
+%greatly simplifies the global balance equations. Splitting $\mathcal{X}$ into two groups by ``cutting'' it down the middle between any two adjacent dose levels $d_m,d_{m+1}$ without loss of generality, the balance equations between the two groups simplify to
 \begin{equation}\label{eq:balance}
 \pi_mp_{m,m+1}=\pi_{m+1}p_{m+1,m},\quad m=1,\ldots,M-1.
 \end{equation}
-The solution is a recursive formula for calculating $\boldsymbol{\pi}$ from transition probabilities:
+The solution is a recursive formula for calculating $\boldsymbol{\pi}$ from the transition probabilities:
 \begin{equation}\label{eq:balance_solution}
 \pi_{m+1}=\lambda_m \pi_m,\ \ \ \lambda_m=\frac{p_{m,m+1}}{p_{m+1,m}},\ \  m=1,\ldots,M-1,
 \end{equation}
-where $\lambda_m$,  the \emph{adjacent-level ratio}, is the ratio between the probabilities of escalating from $d_m$ and de-escalating from $d_{m+1}$. The base-level frequency $\pi_1$ is set by
+where $\lambda_m$,  the \emph{adjacent-level ratio}, is the ratio between the single-step probabilities of escalating from $d_m$ and de-escalating to $d_{m}$. To ensure that $\sum_m \pi_m=1$, the base-level frequency $\pi_1$ is set by
 \begin{equation*}
-\pi_1^{-1}=1+\displaystyle\sum_{m=1}^{M-1}\displaystyle\prod_{j=1}^m\lambda_j
+\pi_1^{-1}=1+\displaystyle\sum_{m=1}^{M-1}\displaystyle\prod_{j=1}^m\lambda_j.
 \end{equation*}
-\noindent to ensure that $\sum_m \pi_m=1$.
 
-\subsubsection{Calculating $\boldsymbol{\pi}$ for BCD and Classical UD}
+\subsubsection{Calculating the Asymptotic Dose--Allocation Distribution for the Biased Coin
+and Classical Up--and--Down Designs}
 
-For BCD, calculation of the adjacent-level ratio $\lambda_m$ is straightforward:
+For the BCD, calculation of the adjacent-level ratio $\lambda_m$ is straightforward:
 \begin{equation}\label{eq:BCDlambda}
 \lambda_m=\frac{p_{m,m+1}}{p_{m+1,m}}=\frac{b\left(1-F(d_m)\right)}{F(d_{m+1})}.
 \end{equation}
 
-\noindent The numerator is monotone decreasing in $m$ while the denominator is increasing, and therefore $\lambda_m$ as a whole is monotone decreasing. It crosses unity near the balance point $x^*$.
+\noindent The numerator is monotone decreasing in $m$ while the denominator is increasing, and therefore, $\lambda_m$ as a whole is monotone decreasing. The doses for which $\{\lambda_m\}$ straddle unity bound the balance point $x^*$.
 
-Interestingly, classical UD presents a somewhat nonstandard case. Since $p_{mm}=0$ except on the boundaries, classical UD Markov chains are \emph{quasiperiodical}. For example, suppose the experiment begins at $d_5$, and $M=10$; then for subjects with an odd index $i$ the allocated dose level $m$ will be odd, and vice versa -- unless and until the trajectory hits upon a boundary and remains there for two consecutive subjects. If the design had no boundaries, then the chain would be purely periodical with a period of 2, yielding two stationary distributions $\boldsymbol{\pi}^{(odd)},\boldsymbol{\pi}^{(even)}$. With finite designs, classical UD has a single $\boldsymbol{\pi}$ with the monotone decreasing adjacent-level ratio $\lambda_m=\left(1-F(d_m)\right)/F(d_{m+1})$.
+Interestingly, the classical UD presents a somewhat nonstandard asymptotic allocation distribution. Since $p_{mm}=0$ except on the boundaries, classical UD Markov chains are \emph{quasiperiodical}. For example, suppose the experiment begins at $d_5$, and $M=10$; then for subjects with an odd index $i$ the allocated dose level $m$ will be odd, and vice versa -- unless and until the trajectory hits upon a boundary and remains there for two consecutive subjects. If the design had no boundaries, then the chain would be purely periodical with a period of 2, yielding two non-communicating stationary distributions $\boldsymbol{\pi}^{(odd)},\boldsymbol{\pi}^{(even)}$. With finite $\mathcal{X}$, the classical UD design has a single $\boldsymbol{\pi}$ with the monotone decreasing adjacent-level ratio $\lambda_m=\left(1-F(d_m)\right)/F(d_{m+1})$.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.55]{pifig}
-\caption{The asymptotic allocation distribution $\boldsymbol{\pi}$ for classical UD (left) and BCD with $\Gamma=0.3$ (right), using the same $\mathcal{X}$ and $F$ as in Figure~\ref{fig:pq}.}\label{fig:pi}
+\caption{The asymptotic dose-allocation distribution $\boldsymbol{\pi}$ for the classical UD (left) and BCD with $\Gamma=0.3$ (right), using the same $\mathcal{X}$ and $F$ as in Figure~\ref{fig:pq}.}\label{fig:pi}
 \end{center}
 \end{figure}
 
-\subsubsection{Unimodality of $\boldsymbol{\pi}$ and its Relationship to the Balance Point $x^*$}\label{sec:modeloc}
+\subsubsection{Unimodality of the Asymptotic Dose--Allocation Distribution and its Relationship to the Balance Point}\label{sec:modeloc}
 
- If$\lambda_m$ is monotone decreasing in $m$, as was just shown for the classical UD and BCD, then it immediately follows that $\boldsymbol{\pi}$ is \emph{unimodal}:
+ If $\lambda_m$ is monotone decreasing in $m$, as was just shown for the classical UD design and BCD, then it immediately follows that $\boldsymbol{\pi}$ is \emph{unimodal}:
 
 \begin{itemize}
 \item  If $\lambda_1\leq 1$ (or $\lambda_M\geq 1$), then $\pi_1\geq\pi_2\geq\cdots\geq\pi_M$ (or vice versa), and $\boldsymbol{\pi}$ has a single mode on the lower (upper) boundary.
 \item If $\lambda_1\geq 1\geq\lambda_M$, then the $\pi_m$ initially increase as $m$ increases, then once $\lambda_m\leq 1$ they monotonically decrease -- thereby creating a single mode.
 \end{itemize}
 
-Asymptotic unimodality is very useful if the mode's location is close to $x^*$ and if -- as stipulated earlier -- the design is chosen so that $F^*\approx\Gamma$ , because then the UD information collection rate about $F(x)$ eventually peaks around the percentile of interest (see e.g., Figure \ref{fig:pi}).\footnote{As long as $F(x)$ is strictly increasing, and transition probabilities are strictly monotone functions of $F(x)$ (as is the case for both classical UD and BCD), then scenarios when $\lambda_m=1$ will be all but nonexistent. If such a case does occur, the maximum value in $\boldsymbol{\pi}$ will be shared by two adjacent levels, called a \emph{modal set}, which together can be still seen as forming a single mode. In other words, qualitatively the design will still behave like in the general case of a single-dose mode.} The following theorem guarantees this property, and can be considered the cornerstone of UD design theory:
+Unimodality of $\boldsymbol{\pi}$ is very useful if the mode's location is close to $x^*$ and if -- as stipulated earlier -- the design is chosen so that $F^*\approx\Gamma$ , because then the UD information collection rate about $F(x)$ eventually peaks around the percentile of interest (see e.g., Figure \ref{fig:pi}).\footnote{As long as $F(x)$ is strictly increasing, and transition probabilities are strictly monotone functions of $F(x)$ (as is the case for both classical UD and BCD), then scenarios when $\lambda_m=1$ will be all but nonexistent. If such a case does occur, the maximum value in $\boldsymbol{\pi}$ will be shared by two adjacent levels, called a \emph{modal set}, which together can be still seen as forming a single mode. In other words, qualitatively the design will still behave like in the general case of a single-dose mode.} The following theorem guarantees this property, and can be considered the cornerstone of UD design theory:
 
-\begin{thm}\label{thm:mode} Consider an UD design generating a Markov chain, with an asymptotic allocation distribution $\boldsymbol{\pi}=\left(\pi_1,\ldots \pi_M\right)$ over $\mathcal{X}$, with $p(x)$ ($q(x)$) strictly monotone decreasing (increasing) in $x$, and a balance point $x^*$ as defined in (\ref{eq:deftarget}). If there exist two adjacent levels $d_{m^*},d_{m^*+1}$ such that $x^*\in\left[d_{m^*},d_{m^*+1}\right]$, then $\boldsymbol{\pi}$'s mode is either at $d_{m^*}$ or at $d_{m^*+1}$. Otherwise, the mode is on the boundary closest to $x^*$.
+\begin{thm}\label{thm:mode} Consider an UD design generating a Markov chain, with an asymptotic allocation distribution $\boldsymbol{\pi}=\left(\pi_1,\ldots \pi_M\right)$ over $\mathcal{X}$, with $p(x)$ ($q(x)$) strictly monotone decreasing (increasing) in $x$, and a balance point $x^*$ as defined in (\ref{eq:deftarget}). If there exist two adjacent levels $d_{m^*}$ and $d_{m^*+1}$ such that $x^*\in\left[d_{m^*},d_{m^*+1}\right]$, then $\boldsymbol{\pi}$'s mode is either at $d_{m^*}$ or at $d_{m^*+1}$. Otherwise, the mode is on the boundary closest to $x^*$.
 \end{thm}
 
 \begin{proof} First, assume that $x^*\in\left[d_{m^*},d_{m^*+1}\right]$. Under the specified monotonicity conditions, the following inequalities always hold for any $2\leq m<M$:
@@ -245,28 +243,28 @@ Asymptotic unimodality is very useful if the mode's location is close to $x^*$ a
 \begin{equation}\label{eq:gammas1}
 \lambda_{m-1}\ \ =\ \ \frac{p(x)\big |_{x=d_{m-1}}}{q(x)\big |_{x=d_m}}\ \ >\ \ \frac{p(x)\big |_{x=d_m}}{q(x)\big |_{x=d_{m}}}\ \ >\ \ \frac{p(x)\big |_{x=d_m}}{q(x)\big |_{x=d_{m+1}}}\ \ =\ \ \lambda_m\ .
 \end{equation}
-\noindent The ratio in the middle of this inequality is monotone decreasing in the dose $x$, and becomes exactly 1 at $x=x^*$. Therefore, for all $m<m^*$, $\lambda_m>1$ and for all $m>m^*$, $\lambda_m<1$. This means that the mode has to be at either $d_{m^*}$ or $d_{m^*+1}$.
+\noindent The ratio in the middle of this inequality is monotone decreasing in the dose $x$, and becomes exactly 1 at $x=x^*$. Therefore, for all $m<m^*$, $\lambda_m>1$ and for all $m>m^*$, $\lambda_m<1$. This means that the mode of $\boldsymbol{\pi}$ has to be at either $d_{m^*}$ or $d_{m^*+1}$.
 
 \noindent On the lower boundary of $\mathcal{X}$, if $x^*<d_1$, then $\lambda_1=p_{12}/p_{21}<p\left(x^*\right)/q\left(x^*\right)=1$ and therefore the mode is at $d_1$. The upper-boundary case is analogous.\qed\end{proof}
 
-Versions of Theorem~\ref{thm:mode} in varying degrees of generality, have appeared in the literature from \cite{Derm:Nonp:1957} onward. The formulation used above is adapted from \cite{Oron:Hoff:thek:2009}. In plain term, the mode of $\boldsymbol{\pi}$ is guaranteed to be at one of the two dose levels straddling the balance point $x^*$.
+Versions of Theorem~\ref{thm:mode} in varying degrees of generality, have appeared in the literature from \cite{Derm:Nonp:1957} onward. The formulation used above is adapted from \cite{Oron:Hoff:thek:2009}. In plain terms, the mode of $\boldsymbol{\pi}$ is guaranteed to be at one of the two dose levels straddling the balance point $x^*$.
 
-Whether the asymptotic mode is in fact on the single closest level to $x^*$ depends upon the design, and upon how ``closest'' is defined. Defining ``closeness'' on the toxicity-frequency ($F$) scale, rather than on the dose ($x$) scale, is generally more useful. For example, the following property can be proven for classical UD.
+Whether the asymptotic mode is in fact on the single closest level to $x^*$ depends upon the design, and upon how ``closest'' is defined. Defining ``closeness'' on the toxicity-frequency ($F$) scale, rather than on the dose ($x$) scale, is generally more useful. For example, the following property can be proven for the classical UD. Denote the two doses straddling $x^*$ by $d_{m^*}$ and $d_{m^*+1}$.
 
 \begin{thm}\label{thm:modesud}
-For the classical UD, $\boldsymbol{\pi}$'s mode is at the level whose $F$ value is closest to $0.5$.
+For the classical UD, $\boldsymbol{\pi}$'s mode is at the level whose toxicity rate is closest to $0.5$.
 \end{thm}
 
-\begin{proof} Let $x^*=F^{-1}(0.5)\in [d_{m^*},d_{m^*+1}]$ and write $F\left(d_{m^*}\right)=0.5-\Delta p_1,F\left(d_{m^*+1}\right)=0.5+\Delta p_2$, where $\Delta p_1,\Delta p_2\geq 0$. Then
+\begin{proof} Let $x^*=F^{-1}(0.5)\in [d_{m^*},d_{m^*+1}]$. Write $F\left(d_{m^*}\right)=0.5-\Delta p_1$ and $F\left(d_{m^*+1}\right)=0.5+\Delta p_2$, where $\Delta p_1\geq 0$ and $\Delta p_2\geq 0$. Then
 
 \begin{equation}\label{eq:sudmode}
 \lambda_{m^*}=\frac{p_{m^*,m^*+1}}{p_{m^*+1,m^*}}=\frac{0.5+\Delta p_1}{0.5+\Delta p_2}.
 \end{equation}
 
-\noindent Therefore $\lambda_{m^*}\geq 1$ if and only if $\Delta p_1\geq\Delta p_2$. The theorem statement immediately follows from this inequality.\qed
+\noindent Therefore, $\lambda_{m^*}\geq 1$ if and only if $\Delta p_1\geq\Delta p_2$. The result immediately follows from this inequality.\qed
 \end{proof}
 
-The analogous result does not hold for BCD. Let $x^*=F^{-1}(\Gamma),\ \Gamma<0.5$, and cast the BCD adjacent-level ratio (\ref{eq:BCDlambda}) into a form analogous to (\ref{eq:sudmode}), to obtain
+For the BCD, the mode is not necessarily the dose closest to the target. Let $x^*=F^{-1}(\Gamma),\ \Gamma<0.5$, and cast the BCD adjacent-level ratio (\ref{eq:BCDlambda}) into a form analogous to (\ref{eq:sudmode}), to obtain
 
 \begin{equation*}
 \lambda_{m^*}=\frac{p_{m^*,m^*+1}}{p_{m^*+1,m^*}}=\frac{\Gamma\left(1-\Gamma+\Delta p_1\right)}{(1-\Gamma)\left(\Gamma+\Delta p_2\right)}.
@@ -274,9 +272,9 @@ The analogous result does not hold for BCD. Let $x^*=F^{-1}(\Gamma),\ \Gamma<0.5
 
 \noindent This adjacent-level ratio is greater than 1 if and only if $\Delta p_1/\Delta p_2>(1-\Gamma)/\Gamma$. For example, if $\Gamma=1/4$ and $x^*\in\left[d_2,d_3\right]$, then the asymptotic mode will be at $d_2$ unless $F\left(d_3\right)$ is 3 times closer to $1/4$ than $F\left(d_2\right)$. This means that the BCD's dose-allocation behavior is somewhat more conservative (i.e., less amenable to dose escalation) than indicated by its nominal target toxicity rate.
 
-\subsubsection{Sharpness of $\boldsymbol{\pi}$}
+\subsubsection{Sharpness of the Asymptotic Dose--Allocation Distribution}
 
-The unimodality of $\boldsymbol{\pi}$, bolstered by Theorem~\ref{thm:mode}, helps concentrate information collection around $x^*$. It is also of practical interest to know how steeply $\boldsymbol{\pi}$ decreases to either side of its mode, in order to know the degree of this concentration and the frequency of excursions away from $x^*$. Assume without loss of generality, that the mode is at a single interior level $d_{m^*}$. Due to monotonicity conditions, we know that $\lambda_{m^*-1}>1$ and $\lambda_{m^*}<1$. If the adjacent-level ratios remained constant at these values on either side of the mode, then the rate of decrease in $\boldsymbol{\pi}$ values away from the mode would be geometric -- the discrete analogue of exponentially-decreasing tails. However, due to their monotonicity, the $\lambda$'s become \emph{more} extreme as one moves away from the mode. Hence, the drop in asymptotic allocation frequencies away from $\boldsymbol{\pi}$'s mode is faster than geometric for UD designs.
+The unimodality of $\boldsymbol{\pi}$ helps concentrate information collection around $x^*$. It is also of practical interest to know how steeply $\boldsymbol{\pi}$ decreases to either side of its mode, in order to know the degree of this concentration and the frequency of excursions away from $x^*$. Assume without loss of generality, that the mode is at a single interior level $d_{m^*}$. Due to monotonicity conditions, we know that $\lambda_{m^*-1}>1$ and $\lambda_{m^*}<1$. If the adjacent-level ratios remained constant at these values on either side of the mode, then the rate of decrease in $\boldsymbol{\pi}$ values away from the mode would be geometric -- the discrete analogue of exponentially-decreasing tails. However, due to their monotonicity, the $\lambda$'s become \emph{more} extreme as one moves away from the mode. Hence, the drop in asymptotic allocation frequencies away from $\boldsymbol{\pi}$'s mode is faster than geometric for UD designs.
 
 \cite{Durh:Flou:rand:1994} obtained a valuable result (shown in Theorem~\ref{thm:discnormal} below) regarding the form of the BCD's $\boldsymbol{\pi}$ and the steepness of this decrease away from the mode. This result requires the following definition:
 
@@ -290,28 +288,29 @@ real valued points $\mathcal{X}$.  Let $\tilde{\Phi}(z)$ denote $P\{Z=z\}$.  The
 
 
 \begin{thm}\label{thm:discnormal}
-Assume that subjects' toxicity thresholds are logistically distributed, with $$1-F(x)=(1+\exp(\mu+\sigma x))^{-1,}\ \ \sigma>0,$$ and that the doses are equally spaced: $\mathcal{X}=\{d_1<d_1+\Delta,d_1+2\Delta<\cdots<d_1+(M-1)\Delta\}.$ Then the BCD's asymptotic allocation distribution is a mixture of two discrete normal distributions over $\mathcal{X}$,  for which the mixing parameter is the target toxicity rate $\Gamma$, that is:
+Assume that subjects' toxicity thresholds are logistically distributed, with $$1-F(x)=(1+\exp(\mu+\sigma x))^{-1,}\ \ \sigma>0,$$ and that the doses are equally spaced: $\mathcal{X}=\{d_1<d_1+\Delta,d_1+2\Delta<\cdots<d_1+(M-1)\Delta\}.$ Then the BCD's asymptotic allocation distribution is a mixture of two discrete normal distributions over $\mathcal{X}$,  for which the mixing parameter is the target toxicity rate $\Gamma$, that is,
 
 \begin{equation}\label{eq:discnormal}
-\pi_m=(1-\Gamma)\tilde{\Phi}\left(\frac{d_m-(x^*-0.5\Delta)}{\sqrt{\Delta/\sigma}}\right)+\Gamma\tilde{\Phi}\left(\frac{d_m-(x^*+0.5\Delta)}{\sqrt{\Delta/\sigma}}\right).
+\pi_m=(1-\Gamma)\tilde{\Phi}\left(\frac{d_m-(x^*-0.5\Delta)}{\sqrt{\Delta/\sigma}}\right)+
+\Gamma\tilde{\Phi}\left(\frac{d_m-(x^*+0.5\Delta)}{\sqrt{\Delta/\sigma}}\right),\ \ d_m\in\mathcal{X}.
 \end{equation}
 \end{thm}
 
-See \cite{Durh:Flou:rand:1994} for the complete proof. The modes of the two discrete normal distributions are separated by one spacing unit $\Delta$, so they have considerable overlap. The first (second) component of (\ref{eq:discnormal}) is the asymptotic allocation distribution for subjects with non-toxic (toxic) responses. If $\Gamma=0.5$, the design is classical UD, the mixture is equally weighted, and as shown in more generality in Theorem~\ref{thm:modesud} the asymptotic mode will be on the dose whose toxicity rate is closest to $0.5$. Conversely, as $\Gamma\to 0$ the first component will dominate, shifting the asymptotic mode as far as $\Delta/2$ downwards.
+See \cite{Durh:Flou:rand:1994} for the complete proof. The modes of the two discrete normal distributions are separated by one dose spacing unit $\Delta$, so they have considerable overlap. The first (second) component of (\ref{eq:discnormal}) is the asymptotic allocation distribution for subjects with non-toxic (toxic) responses. If $\Gamma=0.5$, i.e., the design is the classical UD procedure, the mixture is equally weighted and, as shown in more generality in Theorem~\ref{thm:modesud}, the asymptotic mode will be on the dose whose toxicity rate is closest to $0.5$. Conversely, as $\Gamma\to 0$ the first component will dominate, shifting the asymptotic mode as far as $\Delta/2$ downwards.
 
 Despite the specific parametric assumptions on $F$,  (\ref{eq:discnormal}) provides a useful guideline about the stationary frequency of BCD excursions, because many common response function models are very similar except on the extreme tails, and because (as will be shown later) several common UD designs produce $\boldsymbol{\pi}$s at least as sharp as those of the BCD. Under the assumptions of Theorem~\ref{thm:discnormal}, roughly 97.5\% of the allocations will be within $x^*\pm 2\sqrt{\Delta/\sigma}$.  This approximation can be used to choose $\Delta$ so as to control for highly toxic events, given approximate prior knowledge of the dispersion parameter $\sigma$ \citep{Durh:Flou:Rose:rand:1997}.
 
-\subsection{Up-and-Down Convergence}
+\subsection{Up--and--Down Convergence}
 
 \subsubsection{Convergence to Stationary Behavior}\label{sec:geom}
 
 The presentation of asymptotic UD properties has thus far sidestepped an important practical aspect. Dose-finding experiments are by their nature small-to-medium-sample affairs ($n<100$, and more often than not $n<30$), so asymptotic behavior would generally not dominate the magnitude of observed variability -- as we reminded the reader at the close of Section~\ref{sec:intro}. So why bother about asymptotic behavior at all? Indeed, in recent years dose-finding analyses have rarely examined asymptotic behavior, relying almost exclusively upon numerical simulations instead.
 
-As \cite{oron:azri:hoff:dose:2011} argue, this recent view is misguided. An obvious practical reason is that simulations are, generally speaking, haphazard rather than systematic samples from the space of all relevant dose-toxicity scenarios, and are therefore prone to misuse and abuse -- as anyone who has read enough simulation-based dose-finding articles can attest. But an even stronger,  \emph{conceptual} reason is that all sequential dose-finding designs rely upon some self-correction mechanism. How reliable is the mechanism?\footnote{The term ``reliable'' is used in this chapter in its plain English sense.}
+As \cite{oron:azri:hoff:dose:2011} argue, this recent view is misguided. An obvious practical reason is that simulations are, generally speaking, haphazard rather than systematic samples from the space of all relevant dose-toxicity scenarios, and are therefore prone to misuse and abuse -- as anyone who has read enough simulation-based dose-finding articles can attest. But an even stronger,  \emph{conceptual} reason is that all sequential dose-finding designs rely upon some mechanism for concentrating dose allocations near the target. How good is the mechanism?\footnote{The term ``reliable'' is used in this chapter in its plain English sense.}
 
-A straightforward test is to allow the design to run indefinitely, and see what behavior it leads to. A design with reasonable reliability must lead to reasonably desirable behavior as $n\to\infty$. Conversely, if desirable asymptotic behavior \emph{cannot} be guaranteed, or if the mode of convergence or conditions for convergence make asymptotic behavior all-but-impossible for dose-finding applications, then the design should probably not be trusted even for small-to-medium $n$.\footnote{Another way to think about it: a ``self-correction'' that seems to work acceptably in the beginning, but goes spontaneously bad after a while -- is a contradiction in terms.} Hence the need to look at asymptotics -- as done above -- and at convergence, to which we turn our attention now.
+A straightforward test is to allow the design to run indefinitely, and characterize its behavior. A design with a good concentrating mechanism must demonstrate reasonably desirable behavior as $n\to\infty$. Conversely, if desirable asymptotic behavior \emph{cannot} be guaranteed, or if the type of convergence or conditions for convergence make asymptotic behavior all-but-impossible for dose-finding applications, then the design should probably not be trusted even for small-to-medium $n$. Hence the need to look at asymptotics -- as done above -- and at convergence, to which we turn our attention now.
 
-With sequential designs such as UD, the term ``convergence'' might carry many different meanings. Results have been published about the convergence of UD dose-allocation frequencies \citep{Durh:Flou:up-a:1995,Durh:Flou:Mont:up-a:1995}, and about the convergence of observed toxicity rates for generic dose-finding designs \citep{oron:azri:hoff:dose:2011}. However, the type of convergence that reveals the most about a design's basic properties and limitations, is the convergence of \emph{the dose-allocation process itself}; in the UD case, convergence to stationary sampling from $\boldsymbol{\pi}$.
+With sequential procedures such as UD designs, the term ``convergence'' might carry many different meanings. Results have been published about the convergence of UD dose-allocation frequencies \citep{Durh:Flou:up-a:1995,Durh:Flou:Mont:up-a:1995}, and about the convergence of observed toxicity rates \citep{Flou:Durh:Rose:toxi:1995,oron:azri:hoff:dose:2011}. However, the type of convergence that reveals the most about a design's basic properties and limitations, is the convergence of \emph{the dose-allocation process itself}; in the UD case, convergence to stationary sampling from $\boldsymbol{\pi}$.
 
 For Markov chains, convergence to stationary behavior is equivalent to erasing, or ``mixing'', the arbitrary initial conditions. A deterministically chosen starting dose can be represented by an allocation distribution $\boldsymbol{\rho}$ which is 0 everywhere and 1 at $d_m=x_1$. In the case of a completely random starting point, $\boldsymbol{\rho}$ has a discrete-uniform distribution over $\mathcal{X}$. The allocation distribution after the first subject can be written in matrix form as $\boldsymbol{\rho}^{'}\mathbf{P}$ (see (\ref{eq:genericPmat})). The probability distribution of the $n+1$-th assignment, given the starting conditions only, is $\boldsymbol{\rho}^{'}\mathbf{P^n}$ -- The TPM raised to the $n$-th power \citep{Diac:Stro:geom:1991}. All rows of $\mathbf{P^n}$ become arbitrarily close to $\boldsymbol{\pi}$ as $n\to\infty$, meaning that from some $n$ onwards the marginal allocation distribution of subsequent doses becomes essentially stationary, and independent of the initial conditions $\boldsymbol{\rho}$. Specifically,
 
